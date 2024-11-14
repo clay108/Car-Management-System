@@ -21,6 +21,8 @@ const Navbar = () => {
   const isDashboard = location.pathname === "/dashboard";
 
   const { mode, setMode, isAuthenticated, user, setIsAuthenticated } = useContext(Context);
+  console.log(isAuthenticated);
+  
 
   const navigateTo = useNavigate();
 
