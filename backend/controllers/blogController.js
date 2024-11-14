@@ -3,6 +3,46 @@ import ErrorHandler from "../middlewares/error.js";
 import { Blog } from "../models/blogSchema.js";
 import cloudinary from "cloudinary";
 
+
+export const searchBlogs = async (req, res) => {
+  const query = req.query.q; // Get the search query from the URL parameter
+
+// Check if query exists
+if (!query) {
+  return res.status(400).json({ message: 'Search query is required' });
+}
+
+try {
+  // Create the regex using RegExp constructor, 'i' for case-insensitivity
+  const regex = new RegExp(query, 'ig'); // 'i' for case-insensitive, 'g' for global match
+  
+  // Perform case-insensitive regex search on title field
+  const posts = await Blog.find({
+    title: { $regex: regex }, // Use the RegExp object here
+  });
+
+  // Check if no posts were found
+  if (posts.length === 0) {
+    return res.status(404).json({ message: 'No blogs found' });
+  }
+
+  // Return found posts
+  res.status(200).json({
+    totalPosts: posts.length, // Return the length of the posts array
+    posts: posts,             // Return the posts themselves
+  });
+  
+} catch (err) {
+  // Handle errors
+  console.error(err);
+  res.status(500).json({ message: 'Server error' });
+}
+
+};
+
+
+
+
 export const blogPost = catchAsyncErrors(async (req, res, next) => {
   if (!req.files || Object.keys(req.files).length === 0) {
     return next(new ErrorHandler("Blog Main Image Is Mandatory!", 400));

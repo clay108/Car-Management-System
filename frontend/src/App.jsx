@@ -12,62 +12,57 @@ import Dashboard from "./components/pages/Dashboard";
 import Register from "./components/pages/Register";
 import Login from "./components/pages/Login";
 import AllAuthors from "./components/pages/AllAuthors";
+//import SearchResults from "./components/pages/SearchResults";
+
 import { Context } from "./main";
 import axios from "axios";
 import UpdateBlog from "./components/pages/UpdateBlog";
-
+import SearchResults from "./components/pages/SearchResults"; // Make sure you import SearchResults component
 
 const App = () => {
   const { setUser, isAuthenticated, setIsAuthenticated, user, setBlogs } =
     useContext(Context);
 
-
   useEffect(() => {
     const fetchUser = async () => {
       try {
-         // if (isAuthenticated) {
-          const { data } = await axios.get(
-            `${import.meta.env.VITE_BACKEND_URI}/api/v1/user/myprofile`,
-            {
-              withCredentials: true,
-            }
-          );
-          setUser(data.user);
-          setIsAuthenticated(true);
-        //}
-        } catch (error) {
-          console.log(error);
-          setIsAuthenticated(false);
-          setUser({});
-        }
-      
+        const { data } = await axios.get(
+          `${import.meta.env.VITE_BACKEND_URI}/api/v1/user/myprofile`,
+          {
+            withCredentials: true,
+          }
+        );
+        setUser(data.user);
+        setIsAuthenticated(true);
+      } catch (error) {
+        console.log(error);
+        setIsAuthenticated(false);
+        setUser({});
+      }
     };
-      const fetchBlogs = async () => {
-        try {
-          //if(isAuthenticated){
-          const { data } = await axios.get(
-            `${import.meta.env.VITE_BACKEND_URI}/api/v1/blog/all`,
-            { withCredentials: true }
-          );
-          setBlogs(data.allBlogs);
-      // }
-        } catch (error) {
-          setBlogs([]);
-        }
-      
-      };
-      //if(isAuthenticated){
 
-        fetchUser();
-        fetchBlogs();
-      //}
-    
+    const fetchBlogs = async () => {
+      try {
+        const { data } = await axios.get(
+          `${import.meta.env.VITE_BACKEND_URI}/api/v1/blog/all`,
+          { withCredentials: true }
+        );
+        setBlogs(data.allBlogs);
+      } catch (error) {
+        setBlogs([]);
+      }
+    };
+
+    fetchUser();
+    fetchBlogs();
   }, []);
+
   return (
     <>
       <BrowserRouter>
         <Navbar />
         <Routes>
+          <Route path="/search" element={<SearchResults />} /> {/* Add the SearchResults route */}
           <Route path="/" element={<Home />} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />

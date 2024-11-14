@@ -1,5 +1,6 @@
 import express from "express";
 import {
+  searchBlogs,
   blogPost,
   deleteBlog,
   getAllBlogs,
@@ -17,6 +18,10 @@ router.delete(
   isAuthorized("Author"),
   deleteBlog
 );
+
+router.get('/search', searchBlogs);
+
+
 router.get("/all", getAllBlogs);
 router.get("/singleblog/:id", isAuthenticated, getSingleBlog);
 router.get("/myblogs", isAuthenticated, isAuthorized("Author"), getMyBlogs);
