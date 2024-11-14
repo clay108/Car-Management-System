@@ -5,7 +5,7 @@ import { FaGitSquare } from "react-icons/fa";
 import { Context } from "../../main";
 
 const Footer = () => {
-  const isDashboard = useLocation("http://localhost:5173/dashboard");
+  const isDashboard = useLocation(`${import.meta.env.VITE_FRONTEND_URI}/dashboard`);
   const { mode, setMode } = useContext(Context);
 
   return (

@@ -18,7 +18,7 @@ const Navbar = () => {
     setShow(!show);
   };
 
-  const isDashboard = useLocation(`${import.meta.env.VITE_BACKEND_URI}/dashboard`);
+  const isDashboard = useLocation(`${import.meta.env.VITE_FRONTEND_URI}/dashboard`);
 
   const { mode, setMode, isAuthenticated, user, setIsAuthenticated } = useContext(Context);
 
