@@ -6,6 +6,7 @@ import { Context } from "../../main";
 
 const Footer = () => {
   const isDashboard = useLocation(`${import.meta.env.VITE_FRONTEND_URI}/dashboard`);
+  console.log(isDashboard);
   const { mode, setMode } = useContext(Context);
 
   return (
