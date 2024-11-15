@@ -78,68 +78,71 @@ This document provides detailed information on each API endpoint available in th
     "email": "string",
     "password": "string"
   }
+```
 ### Response:
 ### Success (201 Created):
-
+```
 {
   "success": true,
   "message": "User registered successfully",
   "user": { "id": "string", "name": "string", "email": "string" }
 }
+```
 ###Failure (400 Bad Request):
-
+```
 {
   "success": false,
   "message": "Error message"
 }
+```
 
-Login
-Endpoint: /api/v1/user/login
-Method: POST
+## Login
+### Endpoint: /api/v1/user/login
+- **Method**: `POST`
 Description: Logs in an existing user.
 Request Body:
-json
+```
 Copy code
 {
   "email": "string",
   "password": "string"
 }
+```
 Response:
 Success (200 OK):
-json
-Copy code
+```
 {
   "success": true,
   "token": "string"
 }
+```
 Failure (401 Unauthorized):
-json
-Copy code
+```
 {
   "success": false,
   "message": "Invalid credentials"
 }
+```
 Logout
 Endpoint: /api/v1/user/logout
-Method: POST
+- **Method**: `POST`
 Description: Logs out the current user by clearing their session token.
 Authentication: Requires a valid JWT token.
 Response:
-json
-Copy code
+```
 {
   "success": true,
   "message": "Logged out successfully"
 }
+```
 My Profile
 Endpoint: /api/v1/user/myprofile
-Method: GET
+- **Method**: `GET`
 Description: Retrieves the profile details of the logged-in user.
 Authentication: Requires a valid JWT token.
 Response:
 Success (200 OK):
-json
-Copy code
+```
 {
   "success": true,
   "user": {
@@ -149,37 +152,37 @@ Copy code
     "role": "string"
   }
 }
+```
 Failure (401 Unauthorized):
-json
-Copy code
+```
 {
   "success": false,
   "message": "User is not authenticated"
 }
+```
 Blog Management
 Get All Blogs
 Endpoint: /api/v1/blog/all
-Method: GET
+- **Method**: `GET`
 Description: Retrieves all blogs.
 Authentication: None.
 Response:
 Success (200 OK):
-json
-Copy code
+```
 {
   "success": true,
   "allBlogs": [
     { "id": "string", "title": "string", "content": "string" }
   ]
 }
+```
 Get Blog by ID
 Endpoint: /api/v1/blog/:id
-Method: GET
+- **Method**: `GET`
 Description: Retrieves details of a single blog by ID.
 Response:
 Success (200 OK):
-json
-Copy code
+```
 {
   "success": true,
   "blog": {
@@ -189,29 +192,29 @@ Copy code
     "author": "string"
   }
 }
+```
 Failure (404 Not Found):
-json
-Copy code
+```
 {
   "success": false,
   "message": "Blog not found"
 }
+```
 Create Blog
 Endpoint: /api/v1/blog/create
-Method: POST
+- **Method**: `POST`
 Description: Creates a new blog.
 Authentication: Requires a valid JWT token.
 Request Body:
-json
-Copy code
+```
 {
   "title": "string",
   "content": "string"
 }
+```
 Response:
 Success (201 Created):
-json
-Copy code
+```
 {
   "success": true,
   "blog": {
@@ -221,55 +224,56 @@ Copy code
     "author": "string"
   }
 }
+```
 Update Blog
 Endpoint: /api/v1/blog/update/:id
-Method: PUT
+- **Method**: `PUT`
 Description: Updates a blog by ID.
 Authentication: Requires a valid JWT token and authorization.
 Request Body:
-json
-Copy code
+```
 {
   "title": "string",
   "content": "string"
 }
+```
 Response:
 Success (200 OK):
-json
-Copy code
+```
 {
   "success": true,
   "message": "Blog updated successfully"
 }
+```
 Delete Blog
 Endpoint: /api/v1/blog/delete/:id
-Method: DELETE
+- **Method**: `DELETE`
 Description: Deletes a blog by ID.
 Authentication: Requires a valid JWT token and authorization.
 Response:
 Success (200 OK):
-json
-Copy code
+```
 {
   "success": true,
   "message": "Blog deleted successfully"
 }
+```
 Author Management
 Get All Authors
 Endpoint: /api/v1/user/authors
-Method: GET
+- **Method**: `GET`
 Description: Retrieves all registered authors.
 Response:
 Success (200 OK):
-json
-Copy code
+```
 {
   "success": true,
   "authors": [
     { "id": "string", "name": "string" }
   ]
 }
-Method: GET
+```
+- **Method**: `GET`
 Description: Retrieves all registered authors.
 Response:
 Success (200 OK)
