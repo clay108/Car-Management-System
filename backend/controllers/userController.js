@@ -79,6 +79,7 @@ export const login = catchAsyncErrors(async (req, res, next) => {
     );
   }
   sendToken(user, 200, "User logged in successfully", res);
+  
 });
 
 export const logout = catchAsyncErrors((req, res, next) => {

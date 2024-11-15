@@ -7,7 +7,11 @@ import jwt from "jsonwebtoken";
 export const isAuthenticated = catchAsyncErrors(async (req, res, next) => {
   const { token } = req.cookies;
   if (!token) {
-    return next(new ErrorHandler("User is not authenticated!", 400));
+    token = req.headers["x-auth-token"]; // assuming frontend sends the token in headers
+
+    if (!token) {
+      return next(new ErrorHandler("User is not authenticated!", 400));
+    }
   }
   const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY);
 

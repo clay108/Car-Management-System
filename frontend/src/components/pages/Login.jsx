@@ -23,6 +23,7 @@ const Login = () => {
         }
       )
       .then((res) => {
+        localStorage.setItem("token", res.data.token);
         toast.success(res.data.message);
         setEmail("");
         setPassword("");
@@ -34,6 +35,8 @@ const Login = () => {
         toast.error(error.response.data.message);
       });
   };
+  // console.log("HII");
+  
 
   if (isAuthenticated) {
     console.log("hii");

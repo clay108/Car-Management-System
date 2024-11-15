@@ -30,11 +30,19 @@ const Navbar = () => {
   const handleLogout = async (e) => {
     e.preventDefault();
     try {
+      const token = localStorage.getItem("token");
       const { data } = await axios.get(
         `${import.meta.env.VITE_BACKEND_URI}/api/v1/user/logout`,
-        { withCredentials: true }
+        { headers: {
+          "x-auth-token": token,
+        },
+        withCredentials: true
+       }
       );
       setIsAuthenticated(false);
+      
+      localStorage.removeItem("token");
+
       toast.success(data.message);
       navigateTo("/"); // Redirect to homepage after logout
     } catch (error) {
