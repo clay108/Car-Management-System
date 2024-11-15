@@ -36,7 +36,7 @@ const Login = () => {
   };
 
   if (isAuthenticated) {
-    //console.log("hii");
+    console.log("hii");
     return <Navigate to={'/'} />
   }
 

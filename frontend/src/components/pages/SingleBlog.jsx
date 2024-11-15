@@ -5,7 +5,11 @@ import axios from "axios";
 
 const SingleBlog = () => {
   const { mode, user, isAuthenticated } = useContext(Context);
+  //console.log(isAuthenticated);
+  
   const { id } = useParams();
+  console.log(id);
+  
   const [blog, setBlog] = useState({});
   useEffect(() => {
     const getSingleBlog = async () => {
